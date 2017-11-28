@@ -11,14 +11,29 @@ import {Component} from '@angular/core';
                 {{ course }}
             </li>
         </ul>
+        <div>
+            
+        <button type="button" class="btn btn-outline-warning" [class.active]="isActive" [style.backgroundColor]="isActive ? 'blue' : 'green'">Warning</button>
+        <button (click)="Save($event)">Save</button>
+        <input type="text" (keyup.enter)="onKeyUp()"/>
+        </div>
     `
 })
 
 export class CoursesComponent{
+    isActive=true;
     title="List of courses";
     courses;
 
     constructor(service: CoursesService){
         this.courses=service.getCourse();
+    }
+
+    Save($event){
+        console.log("clicked");
+    }
+
+    onKeyUp(){
+        console.log("Entered");
     }
 }
