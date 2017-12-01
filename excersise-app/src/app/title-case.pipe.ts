@@ -15,14 +15,32 @@ export class TitleCasePipe implements PipeTransform {
     if(!value) return null;
 
     let words=value.split(' ');
+
+
     for(var i=0; i<words.length;i++){
-      if(prepositions.includes(words[i].toLowerCase())){
-        words[i]=words[i].toLowerCase();
-      }else{
-        words[i]=words[i].substr(0, 1).toUpperCase() + words[i].substr(1).toLowerCase();
-      }
+
+      let word=words[i];
+
+      if(i > 0 && this.isPreposition(word))
+        words[i]=word.toLowerCase();
+      else
+        words[i]=this.titleCase(word);
+     
     }
       return words.join(' ');
+  }
+
+
+  private isPreposition(word: string): boolean{
+    let prepositions=[
+      'of', 
+      'the'
+    ];
+    return prepositions.includes(word.toLowerCase());
+  }
+
+  private titleCase(word:string): string{
+    return word.substr(0, 1).toUpperCase() + word.substr(1).toLowerCase();
   }
 
 }

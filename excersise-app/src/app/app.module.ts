@@ -6,13 +6,15 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TitleCaseComponent } from './title-case/title-case.component';
 import { TitleCasePipe } from './title-case.pipe';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TitleCaseComponent,
-    TitleCasePipe
+    TitleCasePipe,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,
