@@ -5,7 +5,8 @@
 
 <div>
     <h2>Favorite Component</h2>
-    <favorite></favorite>
+    <favorite [isFavorite]="post.isFavorite" (change)="onFavoriteChanged()"></favorite>
+    
 </div>
 
 
