@@ -7,11 +7,6 @@ export class TitleCasePipe implements PipeTransform {
 
   transform(value: string): any {
 
-  let prepositions=[
-    'of', 
-    'the'
-  ];
-
     if(!value) return null;
 
     let words=value.split(' ');
