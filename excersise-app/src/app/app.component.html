@@ -5,8 +5,17 @@
 
 <div>
     <h2>Favorite Component</h2>
-    <favorite [isFavorite]="post.isFavorite" (change)="onFavoriteChanged()"></favorite>
-    
+    <favorite [isFavorite]="post.isFavorite" [text]="post.text" (change)="onFavoriteChanged($event)"></favorite>
+</div>
+
+<div>
+    <bootstrap-panel>
+        <ng-container class="heading">Heading</ng-container>
+        <ng-container class="body">
+            <h1>Body</h1>
+            <p>Some Content...</p>
+        </ng-container>
+    </bootstrap-panel>
 </div>
 
 

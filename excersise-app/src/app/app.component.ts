@@ -1,4 +1,6 @@
+import { isFavoriteEventArgs } from './favorite/favorite.component';
 import { Component, transition } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
@@ -8,10 +10,11 @@ import { Component, transition } from '@angular/core';
 export class AppComponent {
   post={
     title : 'Title',
-    isFavorite :false
+    isFavorite :false,
+    text:""
   }
 
-  onFavoriteChanged(){
-    console.log('changed');
+  onFavoriteChanged(eventArgs: isFavoriteEventArgs){
+    console.log('changed', eventArgs);
   }
 }

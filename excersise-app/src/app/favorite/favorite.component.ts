@@ -8,7 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class FavoriteComponent implements OnInit {
 
   @Input('isFavorite') isSelected:boolean;
-  @Output() change=new EventEmitter();
+  @Input('text') text:string;
+  @Output('change') change=new EventEmitter();
 
   constructor() { }
 
@@ -17,10 +18,12 @@ export class FavoriteComponent implements OnInit {
 
   onclick(){
     this.isSelected=!this.isSelected;
-    this.change.emit();
+    this.text= (this.isSelected) ? "Added to Favorite" : "";
+    this.change.emit({newValue: this.isSelected});
   }
+}
 
-  getStyle(){
-    return this.isSelected ? "visible" : "hidden";
-  }
+
+export interface isFavoriteEventArgs{
+  newValue: boolean;
 }
