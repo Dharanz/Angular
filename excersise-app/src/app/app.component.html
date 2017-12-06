@@ -6,9 +6,10 @@
 <div>
     <h2>Favorite Component</h2>
     <favorite [isFavorite]="post.isFavorite" [text]="post.text" (change)="onFavoriteChanged($event)"></favorite>
-</div>
+</div><br />
 
 <div>
+    <h2>Panel Component</h2>
     <bootstrap-panel>
         <ng-container class="heading">Heading</ng-container>
         <ng-container class="body">
@@ -16,6 +17,12 @@
             <p>Some Content...</p>
         </ng-container>
     </bootstrap-panel>
+</div>
+
+
+<div>
+    <h2>Like Component</h2>
+    <like [isSelected]="tweet.isSelected" [likeCount]="tweet.likeCount"></like>
 </div>
 
 

@@ -14,6 +14,11 @@ export class AppComponent {
     text:""
   }
 
+  tweet={
+    isSelected :false,
+    likeCount:10
+    }
+
   onFavoriteChanged(eventArgs: isFavoriteEventArgs){
     console.log('changed', eventArgs);
   }
