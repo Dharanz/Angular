@@ -1,15 +1,15 @@
 <div>
-    <h2>Title Case</h2>
+    <h3>Title Case</h3>
     <titleCase></titleCase>
 </div><br />
 
 <div>
-    <h2>Favorite Component</h2>
+    <h3>Favorite Component</h3>
     <favorite [isFavorite]="post.isFavorite" [text]="post.text" (change)="onFavoriteChanged($event)"></favorite>
 </div><br />
 
 <div>
-    <h2>Panel Component</h2>
+    <h3>Panel Component</h3>
     <bootstrap-panel>
         <ng-container class="heading">Heading</ng-container>
         <ng-container class="body">
@@ -21,8 +21,18 @@
 
 
 <div>
-    <h2>Like Component</h2>
+    <h3>Like Component</h3>
     <like [isSelected]="tweet.isSelected" [likeCount]="tweet.likeCount"></like>
+</div>
+
+<div>
+    <h3>Directives</h3>
+    <directive-examples></directive-examples>
+</div>
+
+<div>
+    <h3>Zippy Component</h3>
+    <zippy></zippy>
 </div>
 
 

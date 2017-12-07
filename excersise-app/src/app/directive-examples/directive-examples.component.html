@@ -1,0 +1,55 @@
+<div *ngIf="coursesList.length>0; then ListOfCourses else noCourses"></div>
+<ng-template #ListOfCourses>
+  List of courses
+</ng-template>
+<ng-template #noCourses>
+  No courses yet
+</ng-template><br/><br/><br/>
+
+<!-- Ngif tabs -->
+<!-- <ul class="nav nav-pills">
+  <li [class.active]="viewCourses=='map'"><a (click)="viewCourses='map'">Map View</a></li>
+  <li [class.active]="viewCourses=='list'"><a (click)="viewCourses='list'">ListView</a></li>
+</ul>
+
+<div *ngIf="viewCourses=='map'; then mapview else listview">
+  <div>Map View</div>  
+  <div>List View</div>
+</div>
+
+<ng-template #mapview>
+  Map View
+</ng-template>
+<ng-template #listview>
+  List View
+</ng-template> -->
+
+
+<ul class="nav nav-pills">
+  <li [class.active]="viewMode=='map'"><a (click)="viewMode='map'">Map View</a></li>
+  <li [class.active]="viewMode=='list'"><a (click)="viewMode='list'">ListView</a></li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+  <div *ngSwitchCase="'map'">Map View</div>  
+  <div *ngSwitchCase="'list'">List View</div>
+  <div *ngSwitchDefault>Others</div>
+</div><br/><br/><br/>
+
+<div>
+  <h5>Courses</h5>
+  <button class="btn btn-success" (click)="onAdd()">Add</button>
+  <ul>
+    <li *ngFor="let course of courses; odd as isodd; index as i">
+        {{i}} - {{ course.name}} <span *ngIf="isodd">odd</span>
+        <button class="btn btn-danger" (click)="onRemove(course)">Remove</button>
+        <span><button class="btn btn-warning" (click)="onChange(course)">Change</button></span>
+    </li>
+  </ul>
+</div><br/><br/><br/>
+
+<div class="col-md-5">
+  <h4>Custom Directive</h4>
+  <input type="text" class="form-control" [appInputFormat]="'tolLowerCase'"/>
+</div><br/><br/><br/>
+
