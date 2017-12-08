@@ -1,0 +1,18 @@
+.zippy{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.zippy-heading{
+    padding: 20px;
+    cursor: pointer;
+}
+
+.zippy-body{
+    padding: 20px;
+}
+
+.isExpand{
+    font-weight: 600;
+    background-color: #f0f0f0;
+}

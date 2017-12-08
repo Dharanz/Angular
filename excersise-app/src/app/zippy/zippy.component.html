@@ -1,3 +1,29 @@
-<p>
-  zippy works!
-</p>
+<div class="zippy">
+  <div class="zippy-heading" [class.isExpand]="isActive" (click)="toggle()">
+    {{ title }}
+    
+    <span class="glyphicon pull-right"
+      [ngClass]="{
+        'glyphicon-chevron-up':isActive,
+        'glyphicon-chevron-down':!isActive }"></span>
+  </div>
+
+  <div class="zippy-body" *ngIf="isActive">
+    Shipping content
+  </div>
+</div>
+
+<div class="zippy">
+  <div class="zippy-heading" [class.isExpand]="isActiveContent" (click)="contentToggle()">
+    {{ billingtTitle }}
+    
+    <span class="glyphicon pull-right"
+      [ngClass]="{
+        'glyphicon-chevron-up':isActiveContent,
+        'glyphicon-chevron-down':!isActiveContent }"></span>
+  </div>
+
+  <div class="zippy-body" *ngIf="isActiveContent">
+    Billing content
+  </div>
+</div>
