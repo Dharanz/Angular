@@ -9,4 +9,9 @@ export class ContactFormComponent{
   log(ngModel){
     console.log(ngModel);
   }
+
+  contactMethod=[
+    { id:1, name:'Email'},
+    { id:2, name:'Phone'}
+  ];
 }
