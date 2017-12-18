@@ -23,6 +23,12 @@ export class SignupFormComponent {
     ])
   });
 
+  login(){
+    this.form.setErrors({
+      invalidLogin: true
+    });
+  }
+
   log(x){
     console.log(x);
   }

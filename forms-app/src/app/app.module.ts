@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CoursesFormComponent } from './courses-form/courses-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { NewCoursesComponent } from './new-courses/new-courses.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
     AppComponent,
     ContactFormComponent,
     CoursesFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    NewCoursesComponent
   ],
   imports: [
     BrowserModule,
