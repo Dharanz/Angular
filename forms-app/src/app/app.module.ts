@@ -8,6 +8,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CoursesFormComponent } from './courses-form/courses-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { NewCoursesComponent } from './new-courses/new-courses.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NewCoursesComponent } from './new-courses/new-courses.component';
     ContactFormComponent,
     CoursesFormComponent,
     SignupFormComponent,
-    NewCoursesComponent
+    NewCoursesComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
