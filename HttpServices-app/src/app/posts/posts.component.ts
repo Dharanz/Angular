@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
+import { BadInputError } from '../common/Bad-input';
 
 @Component({
   selector: 'posts',
@@ -40,8 +41,12 @@ export class PostsComponent implements OnInit {
           
           console.log(response.json());
         }, 
-        error => {
-          alert('Error occured!');
+        (error: AppError) => {
+          if(error instanceof BadInputError)
+          // this.form.setError(error.OriginalError);
+            alert('Cant Insert!');
+          else
+            alert('Error occured!');
           console.log(error);
       })
   }

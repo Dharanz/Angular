@@ -1,9 +1,11 @@
+import { BadInputError } from './../common/Bad-input';
 import { AppError } from './../common/app-error';
+import { NotFoundError } from '../common/not-found-error';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
-import { NotFoundError } from '../common/not-found-error';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class PostsService {
@@ -17,7 +19,12 @@ export class PostsService {
   }
 
   createPost(post) {
-    return this.http.post(this.url, JSON.stringify(post));
+    return this.http.post(this.url, JSON.stringify(post))
+    .catch((error: Response) => {
+      if(error.status == 400)
+         return Observable.throw(new BadInputError(error.json()));
+        return Observable.throw(new AppError(error.json());
+    });
   }
 
   updatePost(post) {
