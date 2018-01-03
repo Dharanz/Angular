@@ -1,9 +1,9 @@
-import { PostsService } from './../services/posts.service';
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
 import { BadInputError } from '../common/Bad-input';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'posts',
@@ -17,15 +17,11 @@ export class PostsComponent implements OnInit {
   constructor(private service: PostsService) { }
 
   ngOnInit() {
-    this.service.getPosts()
+    this.service.get()
       .subscribe(
         response => {
           this.posts = response.json();
-        }, 
-        error => {
-          alert('Error occured!');
-          console.log(error);
-      });
+        });
   }
 
 
@@ -33,7 +29,7 @@ export class PostsComponent implements OnInit {
     let post = { title: input.value };
     input.value = '';
     
-    this.service.createPost(post)
+    this.service.create(post)
       .subscribe(
         response => {
           post['id'] = response.json().id;
@@ -45,27 +41,21 @@ export class PostsComponent implements OnInit {
           if(error instanceof BadInputError)
           // this.form.setError(error.OriginalError);
             alert('Cant Insert!');
-          else
-            alert('Error occured!');
-          console.log(error);
+          else throw error;
       })
   }
 
   updatePost(post){
-    this.service.updatePost(post)
+    this.service.update(post)
       .subscribe(
         response => {
           let index=this.posts.indexOf(post);
           post.title = "updated";
-        },
-        error => {
-          alert('Error occured!');
-          console.log(error);
         });
   }
 
   deletePost(post){
-    this.service.deletePost(345)
+    this.service.delete(345)
       .subscribe(
         resonse => {
           let index= this.posts.indexOf(post);
@@ -74,10 +64,7 @@ export class PostsComponent implements OnInit {
        (error: AppError) => {
           if(error instanceof NotFoundError)
             alert('Name alredy been taken!');
-          else{
-            alert('Error occured!');
-            console.log(error);
-          }
+          else throw error;
       });
   }
 }
