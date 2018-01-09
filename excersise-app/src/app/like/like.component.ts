@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class LikeComponent {
 
     @Input('isSelected') isSelected:Boolean;
-    @Input('likeCount') likeCount:number;
+    @Input('likeCount') likeCount:number = 5;
 
     onclick(){
       this.isSelected=!this.isSelected;
