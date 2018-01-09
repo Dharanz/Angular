@@ -15,8 +15,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { DatabaseComponent } from './database/database.component';
-import { DatabaseService } from './services/database.service';
 
 
 @NgModule({
@@ -27,8 +25,7 @@ import { DatabaseService } from './services/database.service';
     NavbarComponent,
     HomeComponent,
     GithubProfileComponent,
-    NotFoundComponent,
-    DatabaseComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +49,6 @@ import { DatabaseService } from './services/database.service';
         component: PostsComponent
       },
       { 
-        path: 'database', 
-        component: DatabaseComponent
-      },
-      { 
         path: '**', 
         component: NotFoundComponent
       },
@@ -64,7 +57,6 @@ import { DatabaseService } from './services/database.service';
   providers: [
     PostsService,
     GithubFollowersService,
-    DatabaseService,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
