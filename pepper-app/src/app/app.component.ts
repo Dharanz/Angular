@@ -1,5 +1,5 @@
-import { AngularFire} from 'angularfire2';
 import { Component } from '@angular/core';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'app';
 
   constructor(af: AngularFire){
-    console.log(af);
+
   }
 }
