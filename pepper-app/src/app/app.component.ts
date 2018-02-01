@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 
 @Component({
@@ -9,7 +9,14 @@ import { AngularFire } from 'angularfire2';
 export class AppComponent {
   title = 'app works!';
 
-  constructor(af: AngularFire){
-    console.log(af);
+  cuisines;
+  restaurant;
+
+  constructor(private af: AngularFire){
+  }
+
+  ngOnInit(){
+    this.cuisines = this.af.database.list('/cuisines');
+    this.restaurant = this.af.database.object('/restaurant');
   }
 }
