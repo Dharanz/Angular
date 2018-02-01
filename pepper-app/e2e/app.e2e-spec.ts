@@ -1,14 +1,14 @@
-import { AppPage } from './app.po';
+import { PepperAppPage } from './app.po';
 
-describe('pepper-app App', () => {
-  let page: AppPage;
+describe('pepper-app App', function() {
+  let page: PepperAppPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new PepperAppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

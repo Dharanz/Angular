@@ -7,9 +7,9 @@ import { AngularFire } from 'angularfire2';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'app works!';
 
   constructor(af: AngularFire){
-
+    console.log(af);
   }
 }
