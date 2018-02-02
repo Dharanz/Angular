@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-root',
@@ -10,35 +12,70 @@ export class AppComponent {
   title = 'app works!';
 
   cuisines: FirebaseListObservable<any[]>;
-  restaurant;
+  restaurants: Observable<any[]>;
+  exists;
 
   constructor(private af: AngularFire){
   }
 
   ngOnInit(){
-    this.cuisines = this.af.database.list('/cuisines');
-    this.restaurant = this.af.database.object('/restaurant');
-  }
-
-  add(){
-    this.cuisines.push({
-      name: 'Asian',
-      Details: {
-        description: '...'
+    this.cuisines = this.af.database.list('/cuisines', {
+      query: {
+        orderByValue: true
       }
     });
+
+    // this.restaurant = this.af.database.list('/restaurants')
+    //   .map(restaurants => {
+    //     console.log("BEFORE MAP", restaurants);
+    //     restaurants.map(restaurant =>{
+    //       restaurant.cuisineType=this.af.database.object('/cuisines/' + restaurant.cuisine);
+    //     });
+    //     return restaurants;
+    //   });
+
+    this.restaurants = this.af.database.list('/restaurants', {
+      query: {
+        orderByChild: 'rating',
+        equalTo: 5,
+        limitToLast: 10
+      }
+    })
+      .map(restaurants => {
+        restaurants.map(restaurant =>{
+          restaurant.cuisineType=this.af.database.object('/cuisines/' + restaurant.cuisine);
+
+          restaurant.featureTypes=[];
+          for(var f in restaurant.features)
+            restaurant.featureTypes.push(this.af.database.object('/features/' + f));
+        });
+        return restaurants;
+      });
+
+      this.exists=this.af.database.object('restaurants/1/features/1');
   }
 
-  update(){
-    this.restaurant.set({
-      name: 'New Name',
-      rating: 5
-    });
-  }
+// add(){
+  //   this.cuisines.push({
+  //     name: 'Asian',
+  //     Details: {
+  //       description: '...'
+  //     }
+  //   });
+  // }
 
-  remove(){
-    this.af.database.object('/restaurant').remove()
-      .then(x=> console.log("SUCCESS"))
-      .catch(error => console.log("ERROR", error));
-  }
+  // update(){
+  //   this.restaurant.set({
+  //     name: 'New Name',
+  //     rating: 5
+  //   });
+  // }
+
+  // remove(){
+  //   this.af.database.object('/restaurant').remove()
+  //     .then(x=> console.log("SUCCESS"))
+  //     .catch(error => console.log("ERROR", error));
+  // }
+
+  
 }
