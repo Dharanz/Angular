@@ -21,7 +21,7 @@ export class AppComponent {
   ngOnInit(){
     this.cuisines = this.af.database.list('/cuisines', {
       query: {
-        orderByValue: true
+        orderByKey: true
       }
     });
 
@@ -53,7 +53,21 @@ export class AppComponent {
       });
 
       this.exists=this.af.database.object('restaurants/1/features/1');
+
+      // Multiple Updates
+      // this.af.database.list('/restaurants').push({ name : '' })
+      //   .then(x => {
+      //     let restaurant = { name : 'New Restaurant' };
+      //     let update={};
+
+      //     update['restaurants/' + x.key] = null;
+      //     update['restaurants-by-city/camberwell/' + x.key] = null;
+
+      //     this.af.database.object('/').update(update);
+      //   })
+
   }
+
 
 // add(){
   //   this.cuisines.push({
