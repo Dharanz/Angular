@@ -13,34 +13,65 @@ export class AuthenticationComponent implements OnInit {
   constructor(private af: AngularFire) { }
 
   ngOnInit() {
-    this.af.auth.subscribe(authState => {
-      if(!authState) {
-          this.displayName=null;
-          this.photoURL=null;
-          return;
-        }
+    //Provider Verfication
+    // this.af.auth.subscribe(authState => {
+    //   if(!authState) {
+    //       this.displayName=null;
+    //       this.photoURL=null;
+    //       return;
+    //     }
 
-        console.log("Authstate:", authState);
+    //     console.log("Authstate:", authState);
 
-        this.displayName=authState.auth.displayName;
-        this.photoURL=authState.auth.photoURL;
+    //     this.displayName=authState.auth.displayName;
+    //     this.photoURL=authState.auth.photoURL;
+    // });
+
+    //email/password verfication
+    this.af.auth.subscribe(authState => {      
     });
   }
 
-  login() {
+  //Provider Verfication
+  // login() {
+  //   this.af.auth.login({
+  //     provider: AuthProviders.Google,
+  //     method: AuthMethods.Popup
+  //   })
+  //   .then((authState:any) => {
+  //     this.af.database.object('/users/' + authState.uid).update({
+  //       accessToken: authState.google.accessToken
+  //     });
+  //     console.log(authState);
+  //   })
+  // }
+
+  //Email/Password Verification
+  register(){
+    this.af.auth.createUser({
+      email:'muralidharan@gmail.com',
+      password: '12345;-'
+    })
+    .then(authState => {
+      authState.auth.sendEmailVerification(); //Verify user before logged in.
+    })
+    .catch(error => console.log('Register-error', error))
+  }
+
+  login(){
     this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup
+      email:'muralidharan@gmail.com',
+      password: '12345;-'
+    }, {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password
     })
-    .then((authState:any) => {
-      this.af.database.object('/users/' + authState.uid).update({
-        accessToken: authState.google.accessToken
-      });
-      console.log(authState);
-    })
+    .then(authState => console.log('login-then', authState))
+    .catch(error => console.log('Login-error', error))
   }
 
   logout() {
     this.af.auth.logout();
+    alert('Logged Out!');
   }
 }

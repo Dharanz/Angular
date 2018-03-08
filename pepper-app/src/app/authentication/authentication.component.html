@@ -2,5 +2,6 @@
 <h2>Hello {{ displayName }}</h2>
 
 <img *ngIf="photoURL" src="{{ photoURL }}" alt="" style="border-radius:100%" height="50" width="50">
+<button (click)="register()">Register</button>
 <button (click)="login()">Login</button>
 <button (click)="logout()">Logout</button>
