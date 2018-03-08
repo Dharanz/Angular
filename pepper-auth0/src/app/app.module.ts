@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 import { AuthService } from './auth.service';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 @NgModule({
   declarations: [
@@ -18,8 +17,7 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
     HttpModule
   ],
   providers: [
-    AuthService,
-    AUTH_PROVIDERS
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
