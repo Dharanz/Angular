@@ -7,13 +7,19 @@ declare var Auth0Lock:any;
 @Injectable()
 export class AuthService {
 
+  userProfile: any;
+
+  constructor(){
+    this.userProfile=JSON.parse(localStorage.getItem('profile'));
+  }
+
     auth0 = new auth0.WebAuth({
         clientID: 'rsPQFTGbF2XLHBQcQ7HexptVIkWvGneQ',
         domain: 'dharanz-m.auth0.com',
         responseType: 'token id_token',
         audience: 'https://dharanz-m.auth0.com/userinfo',
         redirectUri: 'http://localhost:4200',
-        scope: 'openid'
+        scope: 'openid profile'
       });
 
       public handleAuthentication(): void {
@@ -25,6 +31,14 @@ export class AuthService {
             localStorage.setItem('access_token', authResult.accessToken);
             localStorage.setItem('id_token', authResult.idToken);
             localStorage.setItem('expires_at', expiresAt);
+
+            //getting user profile
+            this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
+              if (profile) {
+                localStorage.setItem('profile', JSON.stringify(profile));
+                this.userProfile = profile;
+              }
+            });
 
           } else if (err) {
             console.log(err);
@@ -47,5 +61,6 @@ export class AuthService {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('profile');
       }
 }
