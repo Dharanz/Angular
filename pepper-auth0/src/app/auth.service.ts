@@ -1,31 +1,11 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
-import { tokenNotExpired } from 'angular2-jwt';
 
 declare var Auth0Lock:any;
 
 @Injectable()
 export class AuthService {
-
-// constructor(){
-//     this.lock.on('authenticated', authResult => {
-//         localStorage.setItem('id_token', authResult.idToken);
-//     });
-// }
-
-// public login(){
-//     this.lock.show();
-// }
-
-// public isAuthenticated(){
-//     return tokenNotExpired();
-// }
-
-// public logout(){
-//     localStorage.removeItem('id_token');
-// }
-
 
     auth0 = new auth0.WebAuth({
         clientID: 'rsPQFTGbF2XLHBQcQ7HexptVIkWvGneQ',
@@ -37,9 +17,7 @@ export class AuthService {
       });
 
       public handleAuthentication(): void {
-        debugger;
         this.auth0.parseHash((err, authResult) => {
-          debugger;
           if (authResult && authResult.accessToken && authResult.idToken) {
             window.location.hash = '';
 
@@ -56,7 +34,6 @@ export class AuthService {
 
     public login(){
         this.auth0.authorize();
-        this.handleAuthentication();
     }
 
     public isAuthenticated() {
@@ -66,7 +43,6 @@ export class AuthService {
       }
 
     public logout(): void {
-      debugger;
         // Remove tokens and expiry time from localStorage
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
